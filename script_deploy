@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# -eq 1 ]; then
+	git add .
+	git commit -m "$1"
+	git push
+	echo "Git repository updated. Now running update on server."
+	ssh qmoricea@192.168.56.3 -p 2222 'bash -s' < script_deployer.sh
+	echo " Done. The server has been updated."
+	exit 0
+fi
